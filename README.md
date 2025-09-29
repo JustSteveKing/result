@@ -51,17 +51,18 @@ All results implement `JustSteveKing\Result\Contracts\ResultInterface<T>` where 
 
 Key operations:
 
-- isOk(): bool / isErr(): bool
-- unwrap(): T — returns the value, or throws UnwrapException on Err
-- expect(string $message): T — like unwrap(), but with your message
-- error(): ?Throwable — returns the error on Err, null on Ok
-- valueOr(T $default): T — returns the value or a default on error
-- map(callable(T): S): ResultInterface<S> — transform an Ok value; no-op on Err
-- mapErr(callable(Throwable): Throwable): ResultInterface<T> — transform the error; no-op on Ok
-- andThen(callable(T): ResultInterface<S>): ResultInterface<S> — flat-map for chaining operations that return Result
-- orElse(callable(Throwable): ResultInterface<T>): ResultInterface<T> — recover from Err by producing a new Result
-- tap(callable(T): void): $this — side-effect on Ok; no-op on Err
-- tapErr(callable(Throwable): void): $this — side-effect on Err; no-op on Ok
+- `isOk(): bool`
+- `isErr(): bool`
+- `unwrap(): T` - returns the value, or throws UnwrapException on Err
+- `expect(string $message): T` - like `unwrap()`, but with your message
+- `error(): ?Throwable` - returns the error on Err, null on Ok
+- `valueOr(T $default): T` - returns the value or a default on error
+- `map(callable(T): S): ResultInterface<S>` — transform an Ok value; no-op on Err
+- `mapErr(callable(Throwable): Throwable): ResultInterface<T>` - transform the error; no-op on Ok
+- `andThen(callable(T): ResultInterface<S>): ResultInterface<S>` - flat-map for chaining operations that return Result
+- `orElse(callable(Throwable): ResultInterface<T>): ResultInterface<T>` - recover from Err by producing a new Result
+- `tap(callable(T): void): $this` - side-effect on Ok; no-op on Err
+- `tapErr(callable(Throwable): void): $this` - side-effect on Err; no-op on Ok
 
 
 ### Examples
@@ -144,7 +145,6 @@ $output = result_match(
 	fn (string $v) => $v . 'b',
 	fn (Throwable $e) => 'error',
 );
-// 'ab'
 ```
 
 
